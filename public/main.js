@@ -8,8 +8,10 @@ const formData = new FormData();
 
 let fileToUpload = ''
 
-fetch('https://file-encrypt.herokuapp.com/api/generateKeys').then(res => res.json()).then(result => {
-  console.log('Helllooo')
+const BASE_URL = 'https://file-encrypt.herokuapp.com'
+
+fetch(`${BASE_URL}/api/generateKeys`).then(res => res.json()).then(result => {
+  console.log(result)
   result.forEach((key, idx) => {
     let keyEl = document.createElement('option')
     keyEl.setAttribute('value', key)
@@ -45,7 +47,7 @@ encryptBtnEl.addEventListener('click', () => {
     return
   }
 
-  fetch('https://file-encrypt.herokuapp.com/api/encrypt', { method: 'POST', body: formData },).then(res => res.json()).then(result => {
+  fetch(`${BASE_URL}/api/encrypt`, { method: 'POST', body: formData },).then(res => res.json()).then(result => {
     console.log(result)
     if (result.status === 'fail') {
       alert(result.message)
@@ -72,7 +74,7 @@ decryptBtnEl.addEventListener('click', () => {
     return
   }
 
-  fetch('https://file-encrypt.herokuapp.com/api/decrypt', { method: 'POST', body: formData },).then(res => res.json()).then(result => {
+  fetch(`${BASE_URL}/api/decrypt`, { method: 'POST', body: formData },).then(res => res.json()).then(result => {
     console.log(result)
     if (result.status === 'fail') {
       alert(result.message)
