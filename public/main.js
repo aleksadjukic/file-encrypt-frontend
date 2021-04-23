@@ -8,7 +8,7 @@ const formData = new FormData();
 
 let fileToUpload = ''
 
-fetch('http://localhost:8080/api/generateKeys').then(res => res.json()).then(result => {
+fetch('https://file-encrypt.herokuapp.com/api/generateKeys').then(res => res.json()).then(result => {
   console.log('Helllooo')
   result.forEach((key, idx) => {
     let keyEl = document.createElement('option')
@@ -45,7 +45,7 @@ encryptBtnEl.addEventListener('click', () => {
     return
   }
 
-  fetch('http://localhost:8080/api/encrypt', { method: 'POST', body: formData },).then(res => res.json()).then(result => {
+  fetch('https://file-encrypt.herokuapp.com/api/encrypt', { method: 'POST', body: formData },).then(res => res.json()).then(result => {
     console.log(result)
     if (result.status === 'fail') {
       alert(result.message)
@@ -72,7 +72,7 @@ decryptBtnEl.addEventListener('click', () => {
     return
   }
 
-  fetch('http://localhost:8080/api/decrypt', { method: 'POST', body: formData },).then(res => res.json()).then(result => {
+  fetch('https://file-encrypt.herokuapp.com/api/decrypt', { method: 'POST', body: formData },).then(res => res.json()).then(result => {
     console.log(result)
     if (result.status === 'fail') {
       alert(result.message)
