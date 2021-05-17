@@ -1,3 +1,4 @@
+const loaderEl = document.getElementById('loader');
 const uploadInputEl = document.getElementById('upload-input');
 const uploadBtnEl = document.getElementById('upload-btn');
 const uploadBtnTextEl = document.getElementById('upload-btn-text');
@@ -11,7 +12,8 @@ let fileToUpload = ''
 const BASE_URL = 'https://file-encrypt.herokuapp.com'
 
 fetch(`${BASE_URL}/api/generateKeys`).then(res => res.json()).then(result => {
-  console.log(result)
+  loaderEl.classList.add('loader-out')
+  loaderEl.remove()
   result.forEach((key, idx) => {
     let keyEl = document.createElement('option')
     keyEl.setAttribute('value', key)
